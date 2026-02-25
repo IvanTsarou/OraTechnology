@@ -114,7 +114,7 @@ export function SubscriptionsSection() {
           />
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {filteredAllUsers.map((user) => (
             <UserCard
               key={user.id}
@@ -188,8 +188,8 @@ function UserCard({
   onToggle: () => void
 }) {
   return (
-    <div className="flex flex-col items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4 text-center transition-colors hover:border-[rgba(255,255,255,0.15)]">
-      <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-[rgba(255,255,255,0.1)]">
+    <div className="flex flex-col items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-3 text-center transition-colors hover:border-[rgba(255,255,255,0.15)] sm:gap-3 sm:p-4">
+      <div className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-[rgba(255,255,255,0.1)] sm:h-16 sm:w-16">
         <Image
           src={user.avatar}
           alt={user.name}
@@ -199,13 +199,13 @@ function UserCard({
         />
       </div>
 
-      <div className="min-w-0">
-        <p className="truncate font-medium text-foreground">{user.name}</p>
+      <div className="min-w-0 w-full">
+        <p className="truncate text-sm font-medium text-foreground sm:text-base">{user.name}</p>
         {user.level && (
-          <p className="text-xs text-muted-foreground">{user.level}</p>
+          <p className="truncate text-[10px] text-muted-foreground sm:text-xs">{user.level}</p>
         )}
-        <p className="text-xs text-muted-foreground">
-          {user.publicationsCount} публикаций
+        <p className="text-[10px] text-muted-foreground sm:text-xs">
+          {user.publicationsCount} публ.
         </p>
       </div>
 
@@ -213,21 +213,21 @@ function UserCard({
         type="button"
         onClick={onToggle}
         className={cn(
-          "flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+          "flex min-h-[36px] w-full items-center justify-center gap-1.5 rounded-lg px-2 text-xs font-medium transition-colors sm:min-h-[40px] sm:gap-2 sm:px-4 sm:text-sm",
           user.isSubscribed
             ? "bg-primary/15 text-primary"
-            : "bg-[rgba(255,255,255,0.06)] text-muted-foreground hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+            : "bg-[rgba(255,255,255,0.06)] text-muted-foreground active:bg-[rgba(255,255,255,0.1)]"
         )}
       >
         {user.isSubscribed ? (
           <>
-            <Check className="h-4 w-4" />
-            Подписан
+            <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Подписан</span>
           </>
         ) : (
           <>
-            <UserPlus className="h-4 w-4" />
-            Подписаться
+            <UserPlus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Подписаться</span>
           </>
         )}
       </button>

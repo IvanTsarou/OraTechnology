@@ -42,26 +42,28 @@ export function CoursesSection() {
         </p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex items-center justify-between gap-4">
+      {/* Tabs and Sort */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <div className="flex gap-1 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-1">
           <button
             type="button"
             onClick={() => setActiveTab("active")}
             className={cn(
-              "rounded-md px-4 py-2 text-sm font-medium transition-colors",
+              "flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors sm:flex-none sm:px-4",
               activeTab === "active"
                 ? "bg-primary/15 text-primary"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            В процессе ({getActiveCourses().length})
+            <span className="sm:hidden">Активные</span>
+            <span className="hidden sm:inline">В процессе</span>
+            <span className="ml-1">({getActiveCourses().length})</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("archived")}
             className={cn(
-              "rounded-md px-4 py-2 text-sm font-medium transition-colors",
+              "flex-1 rounded-md px-3 py-2 text-sm font-medium transition-colors sm:flex-none sm:px-4",
               activeTab === "archived"
                 ? "bg-primary/15 text-primary"
                 : "text-muted-foreground hover:text-foreground"
@@ -75,7 +77,7 @@ export function CoursesSection() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as SortBy)}
-          className="rounded-lg border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] px-3 py-2 text-sm text-foreground"
+          className="h-10 w-full rounded-lg border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] px-3 text-sm text-foreground sm:w-auto"
         >
           <option value="date">По дате</option>
           <option value="name">По названию</option>

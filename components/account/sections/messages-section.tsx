@@ -260,11 +260,11 @@ function ChatConversation({ chat, onBack }: { chat: Chat; onBack: () => void }) 
       </div>
 
       {/* Input */}
-      <div className="shrink-0 border-t border-[rgba(255,255,255,0.08)] p-4">
+      <div className="shrink-0 border-t border-[rgba(255,255,255,0.08)] p-3 pb-4 safe-bottom sm:p-4">
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+            className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground sm:flex"
           >
             <Paperclip className="h-5 w-5" />
           </button>
@@ -274,12 +274,12 @@ function ChatConversation({ chat, onBack }: { chat: Chat; onBack: () => void }) 
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Написать сообщение..."
-              className="h-10 w-full rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] px-4 pr-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none"
+              placeholder="Сообщение..."
+              className="h-11 w-full rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] px-4 pr-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none"
             />
             <button
               type="button"
-              className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+              className="absolute right-1 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
             >
               <Smile className="h-5 w-5" />
             </button>
@@ -288,7 +288,7 @@ function ChatConversation({ chat, onBack }: { chat: Chat; onBack: () => void }) 
             type="button"
             onClick={handleSend}
             disabled={!message.trim()}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-colors hover:brightness-110 disabled:opacity-50"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-colors hover:brightness-110 disabled:opacity-50"
           >
             <Send className="h-5 w-5" />
           </button>

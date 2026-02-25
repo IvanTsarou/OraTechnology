@@ -34,8 +34,8 @@ export function DiarySection() {
 
   return (
     <div className="space-y-4 p-4 lg:p-6">
-      <div className="flex items-start justify-between gap-4">
-        <div>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
           <h1 className="font-serif text-xl font-semibold text-foreground sm:text-2xl">
             Дневник
           </h1>
@@ -46,7 +46,7 @@ export function DiarySection() {
 
         <button
           type="button"
-          className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:brightness-110"
+          className="flex min-h-[44px] shrink-0 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground transition-colors hover:brightness-110 sm:px-4"
         >
           <Plus className="h-4 w-4" />
           <span className="hidden sm:inline">
@@ -104,32 +104,32 @@ function ReportsView({
   return (
     <div className="space-y-4">
       {/* View mode toggle */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-1">
         <button
           type="button"
           onClick={() => onViewModeChange("list")}
           className={cn(
-            "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
+            "flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-md px-3 text-sm transition-colors sm:flex-none",
             viewMode === "list"
               ? "bg-primary/15 text-primary"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
           <List className="h-4 w-4" />
-          Лента
+          <span className="hidden sm:inline">Лента</span>
         </button>
         <button
           type="button"
           onClick={() => onViewModeChange("calendar")}
           className={cn(
-            "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
+            "flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-md px-3 text-sm transition-colors sm:flex-none",
             viewMode === "calendar"
               ? "bg-primary/15 text-primary"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
           <Calendar className="h-4 w-4" />
-          Календарь
+          <span className="hidden sm:inline">Календарь</span>
         </button>
       </div>
 
@@ -258,32 +258,36 @@ function NotesView({
   return (
     <div className="space-y-4">
       {/* Notes tabs */}
-      <div className="flex gap-2">
+      <div className="flex gap-1 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-1">
         <button
           type="button"
           onClick={() => onTabChange("public")}
           className={cn(
-            "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
+            "flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-md px-3 text-sm transition-colors",
             activeTab === "public"
               ? "bg-primary/15 text-primary"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
           <Globe className="h-4 w-4" />
-          Публичные ({getPublicNotes().length})
+          <span className="hidden sm:inline">Публичные</span>
+          <span className="sm:hidden">Публ.</span>
+          <span className="text-xs opacity-70">({getPublicNotes().length})</span>
         </button>
         <button
           type="button"
           onClick={() => onTabChange("private")}
           className={cn(
-            "flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
+            "flex min-h-[40px] flex-1 items-center justify-center gap-2 rounded-md px-3 text-sm transition-colors",
             activeTab === "private"
               ? "bg-primary/15 text-primary"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
           <Lock className="h-4 w-4" />
-          Частные ({getPrivateNotes().length})
+          <span className="hidden sm:inline">Частные</span>
+          <span className="sm:hidden">Личн.</span>
+          <span className="text-xs opacity-70">({getPrivateNotes().length})</span>
         </button>
       </div>
 

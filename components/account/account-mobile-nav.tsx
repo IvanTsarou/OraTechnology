@@ -46,7 +46,7 @@ export function AccountMobileNav({
               type="button"
               onClick={() => onSectionChange(item.id)}
               className={cn(
-                "relative flex min-h-[56px] flex-1 flex-col items-center justify-center gap-0.5 rounded-lg transition-colors",
+                "relative flex min-h-[56px] flex-1 flex-col items-center justify-center gap-0.5 rounded-lg transition-colors active:bg-[rgba(255,255,255,0.06)]",
                 isActive ? "text-primary" : "text-muted-foreground"
               )}
             >
