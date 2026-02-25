@@ -86,20 +86,24 @@ export function CourseCard({ course, index, linkToTeacherId }: CourseCardProps) 
         {InstructorBlock}
 
         {/* Price + actions */}
-        <div className="flex items-center justify-between gap-3 pt-1">
+        <div className="flex items-center justify-between gap-2 pt-1">
           <span className="font-serif text-lg font-bold text-glow-gold tracking-wide">
             {course.price}
           </span>
           <div className="flex items-center gap-2">
             <button
-              className="rounded-lg border border-[rgba(255,255,255,0.1)] p-2 text-muted-foreground transition-all hover:border-[rgba(255,255,255,0.2)] hover:text-foreground"
-              aria-label="Share course"
+              type="button"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.1)] text-muted-foreground transition-all hover:border-[rgba(255,255,255,0.2)] hover:text-foreground active:bg-[rgba(255,255,255,0.06)]"
+              aria-label="Поделиться"
             >
               <Share2 className="h-4 w-4" />
             </button>
-            <button className="glow-button flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:brightness-110">
+            <button
+              type="button"
+              className="glow-button flex h-10 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground transition-all hover:brightness-110 sm:px-4"
+            >
               <ShoppingCart className="h-4 w-4" />
-              <span>Купить</span>
+              <span className="hidden sm:inline">Купить</span>
             </button>
           </div>
         </div>

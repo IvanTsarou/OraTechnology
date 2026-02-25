@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react"
 import Image from "next/image"
-import { Search } from "lucide-react"
+import { Search, X } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -12,13 +12,17 @@ import { blogAuthors, getPostCountByAuthor } from "@/lib/blog-data"
 interface BlogAuthorsSidebarProps {
   selectedAuthors: string[]
   onAuthorsChange: (ids: string[]) => void
+  onReset: () => void
 }
 
 export function BlogAuthorsSidebar({
   selectedAuthors,
   onAuthorsChange,
+  onReset,
 }: BlogAuthorsSidebarProps) {
   const [search, setSearch] = useState("")
+
+  const hasFilters = selectedAuthors.length > 0
 
   const filteredAuthors = useMemo(() => {
     if (!search.trim()) return blogAuthors
@@ -35,64 +39,78 @@ export function BlogAuthorsSidebar({
   }
 
   return (
-    <aside className="flex w-full flex-col border-r border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-56 lg:shrink-0">
+    <aside className="flex w-full flex-col overflow-hidden border-r border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-64 lg:shrink-0">
       <ScrollArea className="h-full max-h-[calc(100vh-12rem)] lg:max-h-[calc(100vh-10rem)]">
-        <div className="flex flex-col gap-4 p-4">
-          <h2 className="text-sm font-semibold text-foreground">Авторы</h2>
+        <div className="flex flex-col gap-5 p-4">
+          {/* Reset button */}
+          {hasFilters && (
+            <button
+              type="button"
+              onClick={onReset}
+              className="flex items-center justify-center gap-2 rounded-lg border border-[rgba(255,255,255,0.1)] px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+              Сбросить фильтры
+            </button>
+          )}
 
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Поиск автора..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-9"
-            />
-          </div>
+          {/* Авторы */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-semibold text-foreground">Авторы</h3>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Поиск автора..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-9"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              {filteredAuthors.map((author) => {
+                const postCount = getPostCountByAuthor(author.id)
+                const isSelected = selectedAuthors.includes(author.id)
 
-          <div className="flex flex-col gap-1">
-            {filteredAuthors.map((author) => {
-              const postCount = getPostCountByAuthor(author.id)
-              const isSelected = selectedAuthors.includes(author.id)
-
-              return (
-                <label
-                  key={author.id}
-                  className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
-                    isSelected && "bg-primary/10"
-                  )}
-                >
-                  <Checkbox
-                    checked={isSelected}
-                    onCheckedChange={() => toggleAuthor(author.id)}
-                  />
-                  <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
-                    <Image
-                      src={author.avatar}
-                      alt={author.name}
-                      fill
-                      className="object-cover"
-                      sizes="32px"
+                return (
+                  <label
+                    key={author.id}
+                    className={cn(
+                      "flex min-w-0 cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-2 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
+                      isSelected && "bg-primary/10"
+                    )}
+                  >
+                    <Checkbox
+                      checked={isSelected}
+                      onCheckedChange={() => toggleAuthor(author.id)}
+                      className="shrink-0"
                     />
-                  </div>
-                  <div className="flex min-w-0 flex-1 flex-col">
-                    <span className="truncate text-sm text-foreground">
-                      {author.name}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {postCount} {postCount === 1 ? "публикация" : postCount < 5 ? "публикации" : "публикаций"}
-                    </span>
-                  </div>
-                </label>
-              )
-            })}
-            {filteredAuthors.length === 0 && (
-              <p className="px-2 py-4 text-center text-sm text-muted-foreground">
-                Авторы не найдены
-              </p>
-            )}
+                    <div className="relative h-7 w-7 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
+                      <Image
+                        src={author.avatar}
+                        alt={author.name}
+                        fill
+                        className="object-cover"
+                        sizes="28px"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm text-foreground">
+                        {author.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {postCount} публ.
+                      </p>
+                    </div>
+                  </label>
+                )
+              })}
+              {filteredAuthors.length === 0 && (
+                <p className="py-4 text-center text-sm text-muted-foreground">
+                  Авторы не найдены
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </ScrollArea>

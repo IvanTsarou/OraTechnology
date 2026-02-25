@@ -96,14 +96,16 @@ export function BlogCard({ post }: BlogCardProps) {
               setIsBookmarked(!isBookmarked)
             }}
             className={cn(
-              "flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs transition-colors",
+              "flex min-h-[36px] items-center gap-1.5 rounded-lg px-2.5 text-xs transition-colors",
               isBookmarked
                 ? "bg-primary/20 text-primary"
-                : "bg-[rgba(255,255,255,0.06)] text-muted-foreground hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+                : "bg-[rgba(255,255,255,0.06)] text-muted-foreground active:bg-[rgba(255,255,255,0.1)]"
             )}
           >
-            <Bookmark className={cn("h-3.5 w-3.5", isBookmarked && "fill-current")} />
-            {isBookmarked ? "В избранном" : "В избранное"}
+            <Bookmark className={cn("h-4 w-4", isBookmarked && "fill-current")} />
+            <span className="hidden sm:inline">
+              {isBookmarked ? "В избранном" : "В избранное"}
+            </span>
           </button>
 
           <div className="relative">
@@ -113,14 +115,14 @@ export function BlogCard({ post }: BlogCardProps) {
                 e.preventDefault()
                 setShowShareMenu(!showShareMenu)
               }}
-              className="flex items-center gap-1 rounded-lg bg-[rgba(255,255,255,0.06)] px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+              className="flex min-h-[36px] items-center gap-1.5 rounded-lg bg-[rgba(255,255,255,0.06)] px-2.5 text-xs text-muted-foreground transition-colors active:bg-[rgba(255,255,255,0.1)]"
             >
-              <Share2 className="h-3.5 w-3.5" />
-              Поделиться
+              <Share2 className="h-4 w-4" />
+              <span className="hidden sm:inline">Поделиться</span>
             </button>
 
             {showShareMenu && (
-              <div className="absolute bottom-full left-0 z-30 mb-2 w-40 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl">
+              <div className="absolute bottom-full right-0 z-30 mb-2 w-44 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl sm:left-0 sm:right-auto">
                 <button
                   type="button"
                   onClick={(e) => {
@@ -128,10 +130,10 @@ export function BlogCard({ post }: BlogCardProps) {
                     navigator.clipboard.writeText(window.location.origin + `/blog/${post.id}`)
                     setShowShareMenu(false)
                   }}
-                  className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-xs text-muted-foreground hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+                  className="flex min-h-[40px] w-full items-center gap-2 rounded-md px-3 text-sm text-muted-foreground active:bg-[rgba(255,255,255,0.06)]"
                 >
-                  <Copy className="h-3.5 w-3.5" />
-                  Копировать ссылку
+                  <Copy className="h-4 w-4" />
+                  Копировать
                 </button>
                 <button
                   type="button"
@@ -140,9 +142,9 @@ export function BlogCard({ post }: BlogCardProps) {
                     window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.origin + `/blog/${post.id}`)}&text=${encodeURIComponent(post.title)}`, "_blank")
                     setShowShareMenu(false)
                   }}
-                  className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-xs text-muted-foreground hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+                  className="flex min-h-[40px] w-full items-center gap-2 rounded-md px-3 text-sm text-muted-foreground active:bg-[rgba(255,255,255,0.06)]"
                 >
-                  <Send className="h-3.5 w-3.5" />
+                  <Send className="h-4 w-4" />
                   Telegram
                 </button>
               </div>

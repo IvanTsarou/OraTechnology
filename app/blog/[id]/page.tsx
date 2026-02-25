@@ -113,7 +113,7 @@ export default function BlogPostPage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative">
-          <div className="relative aspect-[21/9] w-full overflow-hidden lg:aspect-[3/1]">
+          <div className="relative aspect-[16/9] w-full overflow-hidden sm:aspect-[21/9] lg:aspect-[3/1]">
             <Image
               src={post.image}
               alt={post.title}
@@ -125,27 +125,27 @@ export default function BlogPostPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#232946] via-[#232946]/60 to-transparent" />
           </div>
 
-          <div className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-4 pb-8 lg:px-8">
+          <div className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-4 pb-4 sm:pb-8 lg:px-8">
             <Link
               href="/blog"
-              className="mb-4 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+              className="mb-3 inline-flex min-h-[44px] items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary sm:mb-4"
             >
               <ArrowLeft className="h-4 w-4" />
               К блогу
             </Link>
 
-            <span className="mb-3 inline-block rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground">
+            <span className="mb-2 inline-block rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground sm:mb-3">
               {category?.label ?? post.categoryId}
             </span>
 
-            <h1 className="font-serif text-2xl font-semibold tracking-wide text-foreground lg:text-3xl">
+            <h1 className="font-serif text-xl font-semibold tracking-wide text-foreground sm:text-2xl lg:text-3xl">
               {post.title}
             </h1>
 
-            <div className="mt-4 flex flex-wrap items-center gap-4">
+            <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-4 sm:gap-4">
               {author && (
-                <div className="flex items-center gap-3">
-                  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)] sm:h-10 sm:w-10">
                     <Image
                       src={author.avatar}
                       alt={author.name}
@@ -160,7 +160,7 @@ export default function BlogPostPage() {
                     </span>
                     <button
                       type="button"
-                      className="flex items-center gap-1 text-xs text-primary hover:underline"
+                      className="hidden items-center gap-1 text-xs text-primary hover:underline sm:flex"
                     >
                       <Mail className="h-3 w-3" />
                       Написать
@@ -169,19 +169,19 @@ export default function BlogPostPage() {
                 </div>
               )}
 
-              <span className="text-sm text-muted-foreground">{formattedDate}</span>
+              <span className="text-xs text-muted-foreground sm:text-sm">{formattedDate}</span>
 
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-3 text-xs text-muted-foreground sm:gap-4 sm:text-sm">
                 <span className="flex items-center gap-1">
-                  <Eye className="h-4 w-4" />
+                  <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {post.views}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Heart className="h-4 w-4" />
+                  <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {likesCount}
                 </span>
                 <span className="flex items-center gap-1">
-                  <MessageCircle className="h-4 w-4" />
+                  <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   {comments.length}
                 </span>
               </div>
@@ -200,58 +200,59 @@ export default function BlogPostPage() {
         </section>
 
         {/* Interaction panel */}
-        <section className="border-y border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] py-4">
-          <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-4 px-4 lg:px-8">
+        <section className="border-y border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] py-3 sm:py-4">
+          <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-2 px-4 sm:gap-3 lg:px-8">
             <button
               type="button"
               onClick={handleLike}
               className={cn(
-                "flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                "flex min-h-[44px] items-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors sm:px-4",
                 isLiked
                   ? "bg-red-500/20 text-red-400"
-                  : "bg-[rgba(255,255,255,0.06)] text-muted-foreground hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+                  : "bg-[rgba(255,255,255,0.06)] text-muted-foreground active:bg-[rgba(255,255,255,0.1)]"
               )}
             >
               <Heart className={cn("h-4 w-4", isLiked && "fill-current")} />
-              {isLiked ? "Понравилось" : "Нравится"} ({likesCount})
+              <span className="hidden sm:inline">{isLiked ? "Понравилось" : "Нравится"}</span>
+              <span>({likesCount})</span>
             </button>
 
             <button
               type="button"
               onClick={() => setIsBookmarked(!isBookmarked)}
               className={cn(
-                "flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+                "flex min-h-[44px] items-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors sm:px-4",
                 isBookmarked
                   ? "bg-primary/20 text-primary"
-                  : "bg-[rgba(255,255,255,0.06)] text-muted-foreground hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+                  : "bg-[rgba(255,255,255,0.06)] text-muted-foreground active:bg-[rgba(255,255,255,0.1)]"
               )}
             >
               <Bookmark className={cn("h-4 w-4", isBookmarked && "fill-current")} />
-              {isBookmarked ? "В избранном" : "В избранное"}
+              <span className="hidden sm:inline">{isBookmarked ? "В избранном" : "В избранное"}</span>
             </button>
 
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setShowShareMenu(!showShareMenu)}
-                className="flex items-center gap-2 rounded-lg bg-[rgba(255,255,255,0.06)] px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+                className="flex min-h-[44px] items-center gap-2 rounded-lg bg-[rgba(255,255,255,0.06)] px-3 text-sm font-medium text-muted-foreground transition-colors active:bg-[rgba(255,255,255,0.1)] sm:px-4"
               >
                 <Share2 className="h-4 w-4" />
-                Поделиться
+                <span className="hidden sm:inline">Поделиться</span>
               </button>
 
               {showShareMenu && (
-                <div className="absolute bottom-full left-1/2 z-30 mb-2 w-48 -translate-x-1/2 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl">
+                <div className="absolute bottom-full right-0 z-30 mb-2 w-48 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl sm:left-1/2 sm:right-auto sm:-translate-x-1/2">
                   <button
                     type="button"
                     onClick={() => {
                       navigator.clipboard.writeText(window.location.href)
                       setShowShareMenu(false)
                     }}
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+                    className="flex min-h-[44px] w-full items-center gap-2 rounded-md px-3 text-sm text-muted-foreground active:bg-[rgba(255,255,255,0.06)]"
                   >
                     <Copy className="h-4 w-4" />
-                    Копировать ссылку
+                    Копировать
                   </button>
                   <button
                     type="button"
@@ -262,7 +263,7 @@ export default function BlogPostPage() {
                       )
                       setShowShareMenu(false)
                     }}
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+                    className="flex min-h-[44px] w-full items-center gap-2 rounded-md px-3 text-sm text-muted-foreground active:bg-[rgba(255,255,255,0.06)]"
                   >
                     <Send className="h-4 w-4" />
                     Telegram
@@ -274,10 +275,10 @@ export default function BlogPostPage() {
             {author && (
               <button
                 type="button"
-                className="flex items-center gap-2 rounded-lg bg-[rgba(255,255,255,0.06)] px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.1)] hover:text-foreground"
+                className="flex min-h-[44px] items-center gap-2 rounded-lg bg-[rgba(255,255,255,0.06)] px-3 text-sm font-medium text-muted-foreground transition-colors active:bg-[rgba(255,255,255,0.1)] sm:px-4"
               >
                 <Mail className="h-4 w-4" />
-                Написать автору
+                <span className="hidden sm:inline">Написать автору</span>
               </button>
             )}
           </div>

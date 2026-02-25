@@ -87,14 +87,39 @@ export default function CurriculumCoursePage() {
           </div>
         </section>
 
-        <section className="py-10">
-          <div className="mx-auto grid max-w-4xl gap-10 px-4 lg:grid-cols-3 lg:px-8">
+        <section className="py-6 sm:py-10">
+          <div className="mx-auto grid max-w-4xl gap-6 px-4 sm:gap-10 lg:grid-cols-3 lg:px-8">
+            {/* Mobile: Price card first */}
+            {course.price && (
+              <div className="rounded-xl border border-primary/30 bg-primary/10 p-4 sm:p-5 lg:hidden">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Banknote className="h-5 w-5 text-primary" />
+                      <span className="text-sm font-medium text-muted-foreground">
+                        Стоимость
+                      </span>
+                    </div>
+                    <p className="mt-1 font-serif text-2xl font-bold text-primary">
+                      {course.price}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="glow-button min-h-[48px] rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-all hover:brightness-110"
+                  >
+                    Записаться
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="space-y-6 lg:col-span-2">
               <div>
                 <h2 className="mb-3 text-lg font-semibold text-foreground">
                   О курсе
                 </h2>
-                <p className="leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {course.description}
                 </p>
               </div>
@@ -114,16 +139,16 @@ export default function CurriculumCoursePage() {
               )}
             </div>
 
-            <aside className="space-y-6">
+            <aside className="space-y-4 sm:space-y-6">
               {/* Учитель */}
               {teacher && (
-                <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-5">
+                <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4 sm:p-5">
                   <h3 className="mb-3 text-sm font-semibold text-foreground">
                     Учитель
                   </h3>
                   <Link
                     href={`/teachers/${teacher.id}`}
-                    className="flex items-center gap-3 transition-colors hover:text-primary"
+                    className="flex min-h-[48px] items-center gap-3 transition-colors active:opacity-80"
                   >
                     <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
                       <Image
@@ -142,7 +167,7 @@ export default function CurriculumCoursePage() {
               )}
 
               {/* Детали */}
-              <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-5">
+              <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4 sm:p-5">
                 <h3 className="mb-3 text-sm font-semibold text-foreground">
                   Детали
                 </h3>
@@ -178,9 +203,9 @@ export default function CurriculumCoursePage() {
                 </ul>
               </div>
 
-              {/* Стоимость */}
+              {/* Стоимость - Desktop only */}
               {course.price && (
-                <div className="rounded-xl border border-primary/30 bg-primary/10 p-5">
+                <div className="hidden rounded-xl border border-primary/30 bg-primary/10 p-5 lg:block">
                   <div className="flex items-center gap-2">
                     <Banknote className="h-5 w-5 text-primary" />
                     <span className="text-sm font-medium text-muted-foreground">
@@ -192,7 +217,7 @@ export default function CurriculumCoursePage() {
                   </p>
                   <button
                     type="button"
-                    className="glow-button mt-4 w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:brightness-110"
+                    className="glow-button mt-4 min-h-[48px] w-full rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground transition-all hover:brightness-110"
                   >
                     Записаться
                   </button>

@@ -2,8 +2,7 @@
 
 import { useState, useMemo } from "react"
 import Image from "next/image"
-import Link from "next/link"
-import { Search } from "lucide-react"
+import { Search, X } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -20,6 +19,7 @@ interface LibrarySidebarProps {
   selectedAuthorIds: string[]
   onAuthorIdsChange: (ids: string[]) => void
   authors: LibraryAuthor[]
+  onReset: () => void
 }
 
 export function LibrarySidebar({
@@ -28,8 +28,11 @@ export function LibrarySidebar({
   selectedAuthorIds,
   onAuthorIdsChange,
   authors,
+  onReset,
 }: LibrarySidebarProps) {
   const [authorSearch, setAuthorSearch] = useState("")
+
+  const hasFilters = selectedTypes.length > 0 || selectedAuthorIds.length > 0
 
   const filteredAuthors = useMemo(() => {
     if (!authorSearch.trim()) return authors
@@ -54,28 +57,41 @@ export function LibrarySidebar({
   }
 
   return (
-    <aside className="flex w-full flex-col border-r border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-64 lg:shrink-0">
-      <ScrollArea className="h-full max-h-[calc(100vh-12rem)] lg:max-h-[calc(100vh-14rem)]">
-        <div className="flex flex-col gap-6 p-4">
+    <aside className="flex w-full flex-col overflow-hidden border-r border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-64 lg:shrink-0">
+      <ScrollArea className="h-full max-h-[calc(100vh-12rem)] lg:max-h-[calc(100vh-10rem)]">
+        <div className="flex flex-col gap-5 p-4">
+          {/* Reset button */}
+          {hasFilters && (
+            <button
+              type="button"
+              onClick={onReset}
+              className="flex items-center justify-center gap-2 rounded-lg border border-[rgba(255,255,255,0.1)] px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+              Сбросить фильтры
+            </button>
+          )}
+
           {/* Тип материала */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-foreground">
               Тип материала
             </h3>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {MATERIAL_TYPES.map((type) => (
                 <label
                   key={type}
                   className={cn(
-                    "flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
+                    "flex min-w-0 cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-3 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
                     selectedTypes.includes(type) && "bg-primary/10"
                   )}
                 >
                   <Checkbox
                     checked={selectedTypes.includes(type)}
                     onCheckedChange={() => toggleType(type)}
+                    className="shrink-0"
                   />
-                  <span className="text-sm text-foreground">
+                  <span className="truncate text-sm text-foreground">
                     {getTypeLabel(type)}
                   </span>
                 </label>
@@ -101,37 +117,31 @@ export function LibrarySidebar({
                 <label
                   key={author.id}
                   className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
+                    "flex min-w-0 cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-2 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
                     selectedAuthorIds.includes(author.id) && "bg-primary/10"
                   )}
                 >
                   <Checkbox
                     checked={selectedAuthorIds.includes(author.id)}
                     onCheckedChange={() => toggleAuthor(author.id)}
+                    className="shrink-0"
                   />
-                  <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
+                  <div className="relative h-7 w-7 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
                     <Image
                       src={author.avatar}
                       alt={author.name}
                       fill
                       className="object-cover"
-                      sizes="32px"
+                      sizes="28px"
                     />
                   </div>
                   <span className="min-w-0 flex-1 truncate text-sm text-foreground">
                     {author.name}
                   </span>
-                  <Link
-                    href={`/teachers/${author.id}`}
-                    onClick={(e) => e.stopPropagation()}
-                    className="shrink-0 text-xs text-primary hover:underline"
-                  >
-                    Профиль
-                  </Link>
                 </label>
               ))}
               {filteredAuthors.length === 0 && (
-                <p className="px-2 py-2 text-sm text-muted-foreground">
+                <p className="py-4 text-center text-sm text-muted-foreground">
                   Никого не найдено
                 </p>
               )}

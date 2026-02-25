@@ -8,11 +8,11 @@ import { cn } from "@/lib/utils"
 import { blogCategories, type DatePreset } from "@/lib/blog-data"
 
 const datePresets: { id: DatePreset; label: string }[] = [
-  { id: "all", label: "Все время" },
+  { id: "all", label: "Все" },
   { id: "today", label: "Сегодня" },
-  { id: "week", label: "Эта неделя" },
-  { id: "month", label: "Этот месяц" },
-  { id: "year", label: "Этот год" },
+  { id: "week", label: "Неделя" },
+  { id: "month", label: "Месяц" },
+  { id: "year", label: "Год" },
 ]
 
 interface BlogFiltersSidebarProps {
@@ -50,11 +50,11 @@ export function BlogFiltersSidebar({
   }
 
   return (
-    <aside className="flex w-full flex-col border-l border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-64 lg:shrink-0">
+    <aside className="flex w-full flex-col overflow-hidden border-l border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-64 lg:shrink-0">
       <ScrollArea className="h-full max-h-[calc(100vh-12rem)] lg:max-h-[calc(100vh-10rem)]">
         <div className="flex flex-col gap-5 p-4">
-          {/* Results count */}
-          <div className="flex items-center justify-between">
+          {/* Results count & Reset */}
+          <div className="flex items-center justify-between gap-2">
             <span className="text-sm text-muted-foreground">
               Найдено:{" "}
               <span className="font-medium text-foreground">{resultsCount}</span>
@@ -66,19 +66,19 @@ export function BlogFiltersSidebar({
                 className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)] hover:text-foreground"
               >
                 <X className="h-3 w-3" />
-                Сбросить
+                Сброс
               </button>
             )}
           </div>
 
           {/* Search */}
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="text-sm font-semibold text-foreground">Поиск</h3>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="По заголовку или тексту..."
+                placeholder="По тексту..."
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
                 className="pl-9"
@@ -89,22 +89,23 @@ export function BlogFiltersSidebar({
           {/* Categories */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-foreground">Категории</h3>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {blogCategories.map((cat) => {
                 const isSelected = selectedCategories.includes(cat.id)
                 return (
                   <label
                     key={cat.id}
                     className={cn(
-                      "flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
+                      "flex min-w-0 cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-3 py-2 transition-colors hover:bg-[rgba(255,255,255,0.04)]",
                       isSelected && "bg-primary/10"
                     )}
                   >
                     <Checkbox
                       checked={isSelected}
                       onCheckedChange={() => toggleCategory(cat.id)}
+                      className="shrink-0"
                     />
-                    <span className="text-sm text-foreground">{cat.label}</span>
+                    <span className="truncate text-sm text-foreground">{cat.label}</span>
                   </label>
                 )
               })}
@@ -113,9 +114,7 @@ export function BlogFiltersSidebar({
 
           {/* Date presets */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-foreground">
-              Дата публикации
-            </h3>
+            <h3 className="text-sm font-semibold text-foreground">Дата</h3>
             <div className="flex flex-wrap gap-2">
               {datePresets.map((preset) => (
                 <button
