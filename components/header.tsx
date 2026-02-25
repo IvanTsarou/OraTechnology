@@ -76,13 +76,13 @@ export function Header() {
           >
             <Home className="h-4 w-4" />
           </Link>
-          <a
-            href="#"
+          <Link
+            href="/account"
             className="glow-button flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground transition-all hover:brightness-110"
           >
             <User className="h-4 w-4" />
             <span>Личный кабинет</span>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -136,13 +136,13 @@ export function Header() {
             >
               <Home className="h-5 w-5" />
             </Link>
-            <a
-              href="#"
+            <Link
+              href="/account"
               className="glow-button flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-primary text-base font-medium text-primary-foreground"
             >
               <User className="h-5 w-5" />
               Личный кабинет
-            </a>
+            </Link>
           </div>
         </nav>
       </div>
