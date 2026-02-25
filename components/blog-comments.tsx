@@ -185,7 +185,7 @@ function CommentItem({
             >
               +
             </button>
-            <div className="absolute bottom-full left-0 z-10 mb-2 hidden rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#1a1f35] p-2 shadow-xl group-hover:flex">
+            <div className="absolute bottom-full left-0 z-10 mb-2 hidden rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl group-hover:flex">
               {["❤️", "👍", "🔥", "🙏", "💡", "🤔"].map((emoji) => (
                 <button
                   key={emoji}

@@ -122,7 +122,7 @@ export default function BlogPostPage() {
               sizes="100vw"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f35] via-[#1a1f35]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#232946] via-[#232946]/60 to-transparent" />
           </div>
 
           <div className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-4 pb-8 lg:px-8">
@@ -241,7 +241,7 @@ export default function BlogPostPage() {
               </button>
 
               {showShareMenu && (
-                <div className="absolute bottom-full left-1/2 z-30 mb-2 w-48 -translate-x-1/2 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#1a1f35] p-2 shadow-xl">
+                <div className="absolute bottom-full left-1/2 z-30 mb-2 w-48 -translate-x-1/2 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl">
                   <button
                     type="button"
                     onClick={() => {

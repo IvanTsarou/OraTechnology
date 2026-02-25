@@ -20,7 +20,7 @@ export function Header() {
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[rgba(255,255,255,0.06)] bg-[#1a1f35]/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-[rgba(255,255,255,0.06)] bg-[#232946]/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -79,7 +79,7 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="border-t border-[rgba(255,255,255,0.06)] bg-[#1a1f35]/95 backdrop-blur-xl lg:hidden">
+        <div className="border-t border-[rgba(255,255,255,0.06)] bg-[#232946]/95 backdrop-blur-xl lg:hidden">
           <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Mobile navigation">
             {navItems.map((item) => {
               const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)

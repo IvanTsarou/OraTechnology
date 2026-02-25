@@ -69,7 +69,7 @@ export function CourseCard({ course, index, linkToTeacherId }: CourseCardProps) 
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f35]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#232946]/60 to-transparent" />
         {/* Lesson count badge */}
         <span className="absolute bottom-3 left-3 rounded-full bg-[rgba(0,0,0,0.5)] backdrop-blur-md px-3 py-1 text-xs font-medium text-foreground">
           {course.lessons} {getLessonWord(course.lessons)}

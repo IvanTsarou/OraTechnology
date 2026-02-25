@@ -38,7 +38,7 @@ export function BlogCard({ post }: BlogCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f35]/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#232946]/80 via-transparent to-transparent" />
 
         {/* Category badge */}
         <span className="absolute left-3 top-3 rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-primary-foreground">
@@ -120,7 +120,7 @@ export function BlogCard({ post }: BlogCardProps) {
             </button>
 
             {showShareMenu && (
-              <div className="absolute bottom-full left-0 z-30 mb-2 w-40 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#1a1f35] p-2 shadow-xl">
+              <div className="absolute bottom-full left-0 z-30 mb-2 w-40 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#2d3561] p-2 shadow-xl">
                 <button
                   type="button"
                   onClick={(e) => {

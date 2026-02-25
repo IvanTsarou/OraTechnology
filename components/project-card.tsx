@@ -31,7 +31,7 @@ export function ProjectCard({ project, isActive, onClick }: ProjectCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="320px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f35]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#232946]/70 to-transparent" />
         <h3 className="absolute bottom-3 left-3 right-3 font-serif text-lg font-semibold tracking-wide text-foreground drop-shadow-md">
           {project.name}
         </h3>
