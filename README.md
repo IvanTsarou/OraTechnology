@@ -2,6 +2,10 @@
 
 Фронтенд страницы «Курсы» для Ora Technology. Next.js 16, React 19, Tailwind CSS.
 
+## Требования
+
+- **Node.js 20+** (рекомендуется 20.9+ или LTS). Проверка: `node -v`.
+
 ## Локальный запуск
 
 ```bash
@@ -24,6 +28,18 @@ npm run dev
 pnpm build
 pnpm start
 ```
+
+## Публикация в GitHub (репозиторий OraTechnology)
+
+1. Создайте на GitHub репозиторий **OraTechnology** (пустой, без README).
+2. Если репозиторий под другой организацией или пользователем, замените remote:
+   ```bash
+   git remote set-url origin https://github.com/ВАШ_USERNAME/OraTechnology.git
+   ```
+3. Выполните пуш:
+   ```bash
+   git push -u origin main
+   ```
 
 ## Деплой на Vercel
 
