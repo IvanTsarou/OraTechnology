@@ -32,11 +32,11 @@ pnpm start
 ## Публикация в GitHub (репозиторий OraTechnology)
 
 1. Создайте на GitHub репозиторий **OraTechnology** (пустой, без README).
-2. Если репозиторий под другой организацией или пользователем, замените remote:
+2. Remote уже настроен на `https://github.com/IvanTsarou/OraTechnology.git`. При необходимости замените:
    ```bash
-   git remote set-url origin https://github.com/ВАШ_USERNAME/OraTechnology.git
+   git remote set-url origin https://github.com/IvanTsarou/OraTechnology.git
    ```
-3. Выполните пуш:
+3. Выполните пуш (если ещё не выполняли):
    ```bash
    git push -u origin main
    ```
