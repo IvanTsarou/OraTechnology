@@ -1,7 +1,9 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Share2, ShoppingCart } from "lucide-react"
+import { getTeacherIdByName } from "@/lib/teachers-data"
 
 export interface Course {
   id: string
@@ -16,9 +18,43 @@ export interface Course {
 interface CourseCardProps {
   course: Course
   index: number
+  /** When on teacher profile, pass teacher id to link instructor name. Otherwise link is derived from course.instructor. */
+  linkToTeacherId?: string
 }
 
-export function CourseCard({ course, index }: CourseCardProps) {
+export function CourseCard({ course, index, linkToTeacherId }: CourseCardProps) {
+  const teacherId = linkToTeacherId ?? getTeacherIdByName(course.instructor)
+  const InstructorBlock = teacherId ? (
+    <Link
+      href={`/teachers/${teacherId}`}
+      className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
+    >
+      <div className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
+        <Image
+          src={course.avatar}
+          alt={course.instructor}
+          fill
+          className="object-cover"
+          sizes="24px"
+        />
+      </div>
+      <span>{course.instructor}</span>
+    </Link>
+  ) : (
+    <div className="flex items-center gap-2">
+      <div className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
+        <Image
+          src={course.avatar}
+          alt={course.instructor}
+          fill
+          className="object-cover"
+          sizes="24px"
+        />
+      </div>
+      <span className="text-sm text-muted-foreground">{course.instructor}</span>
+    </div>
+  )
+
   return (
     <article
       className="glass-card group animate-fade-in-up rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
@@ -47,18 +83,7 @@ export function CourseCard({ course, index }: CourseCardProps) {
         </h3>
 
         {/* Instructor */}
-        <div className="flex items-center gap-2">
-          <div className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full border border-[rgba(255,255,255,0.1)]">
-            <Image
-              src={course.avatar}
-              alt={course.instructor}
-              fill
-              className="object-cover"
-              sizes="24px"
-            />
-          </div>
-          <span className="text-sm text-muted-foreground">{course.instructor}</span>
-        </div>
+        {InstructorBlock}
 
         {/* Price + actions */}
         <div className="flex items-center justify-between gap-3 pt-1">

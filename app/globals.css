@@ -162,3 +162,106 @@ body::before {
 .animate-fade-in-up {
   animation: fadeInUp 0.5s ease-out forwards;
 }
+
+/* Library grid: fade/scale on filter change */
+@keyframes libraryCardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.library-grid .library-card {
+  animation: libraryCardIn 0.4s ease-out forwards;
+}
+
+.library-grid .library-card:nth-child(1) { animation-delay: 0ms; }
+.library-grid .library-card:nth-child(2) { animation-delay: 40ms; }
+.library-grid .library-card:nth-child(3) { animation-delay: 80ms; }
+.library-grid .library-card:nth-child(4) { animation-delay: 120ms; }
+.library-grid .library-card:nth-child(5) { animation-delay: 160ms; }
+.library-grid .library-card:nth-child(6) { animation-delay: 200ms; }
+.library-grid .library-card:nth-child(7) { animation-delay: 240ms; }
+.library-grid .library-card:nth-child(8) { animation-delay: 280ms; }
+.library-grid .library-card:nth-child(9) { animation-delay: 320ms; }
+.library-grid .library-card:nth-child(10) { animation-delay: 360ms; }
+.library-grid .library-card:nth-child(11) { animation-delay: 400ms; }
+.library-grid .library-card:nth-child(12) { animation-delay: 440ms; }
+.library-grid .library-card:nth-child(n+13) { animation-delay: 480ms; }
+
+/* Teachers grid: fade/scale on filter */
+@keyframes teacherCardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.teachers-grid .teacher-card {
+  animation: teacherCardIn 0.4s ease-out forwards;
+}
+
+.teachers-grid .teacher-card:nth-child(1) { animation-delay: 0ms; }
+.teachers-grid .teacher-card:nth-child(2) { animation-delay: 40ms; }
+.teachers-grid .teacher-card:nth-child(3) { animation-delay: 80ms; }
+.teachers-grid .teacher-card:nth-child(4) { animation-delay: 120ms; }
+.teachers-grid .teacher-card:nth-child(5) { animation-delay: 160ms; }
+.teachers-grid .teacher-card:nth-child(6) { animation-delay: 200ms; }
+.teachers-grid .teacher-card:nth-child(7) { animation-delay: 240ms; }
+.teachers-grid .teacher-card:nth-child(8) { animation-delay: 280ms; }
+.teachers-grid .teacher-card:nth-child(n+9) { animation-delay: 320ms; }
+
+/* Curriculum cards: fade/scale animation */
+@keyframes curriculumCardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.curriculum-card {
+  animation: curriculumCardIn 0.35s ease-out forwards;
+}
+
+.curriculum-card:nth-child(1) { animation-delay: 0ms; }
+.curriculum-card:nth-child(2) { animation-delay: 30ms; }
+.curriculum-card:nth-child(3) { animation-delay: 60ms; }
+.curriculum-card:nth-child(4) { animation-delay: 90ms; }
+.curriculum-card:nth-child(5) { animation-delay: 120ms; }
+.curriculum-card:nth-child(n+6) { animation-delay: 150ms; }
+
+/* Blog cards: fade/scale animation */
+@keyframes blogCardIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.blog-card {
+  animation: blogCardIn 0.4s ease-out forwards;
+}
+
+.blog-card:nth-child(1) { animation-delay: 0ms; }
+.blog-card:nth-child(2) { animation-delay: 50ms; }
+.blog-card:nth-child(3) { animation-delay: 100ms; }
+.blog-card:nth-child(4) { animation-delay: 150ms; }
+.blog-card:nth-child(5) { animation-delay: 200ms; }
+.blog-card:nth-child(6) { animation-delay: 250ms; }
+.blog-card:nth-child(n+7) { animation-delay: 300ms; }
