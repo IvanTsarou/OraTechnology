@@ -4,6 +4,7 @@ import { useState } from "react"
 import { AccountNav, type AccountSection } from "@/components/account/account-nav"
 import { AccountMobileNav } from "@/components/account/account-mobile-nav"
 import { AccountMobileHeader } from "@/components/account/account-mobile-header"
+import { AccountHeader } from "@/components/account/account-header"
 import { AccountSidebar } from "@/components/account/account-sidebar"
 import { DashboardSection } from "@/components/account/sections/dashboard-section"
 import { CoursesSection } from "@/components/account/sections/courses-section"
@@ -36,6 +37,9 @@ export default function AccountPage() {
 
   return (
     <div className="flex h-screen flex-col">
+      {/* Global header - desktop */}
+      <AccountHeader />
+
       {/* Mobile header */}
       <AccountMobileHeader />
 
