@@ -10,13 +10,23 @@ export default function MainScene() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isMuted, setIsMuted] = useState(true)
+  const [isMuted, setIsMuted] = useState(false)
   const [audioLoaded, setAudioLoaded] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
+
+  // Автозапуск музыки при загрузке
+  useEffect(() => {
+    if (audioRef.current && !isMuted && audioLoaded) {
+      audioRef.current.play().catch(() => {
+        // Браузер заблокировал автовоспроизведение - ждём взаимодействия
+        setIsMuted(true)
+      })
+    }
+  }, [audioLoaded, isMuted])
 
   // Управление громкостью музыки в зависимости от прогресса
   useEffect(() => {
