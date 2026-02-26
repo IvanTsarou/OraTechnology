@@ -60,8 +60,15 @@ export function AccountMobileHeader() {
             </span>
           </Link>
 
-          {/* Right: user avatar + burger */}
+          {/* Right: home, user avatar, burger */}
           <div className="flex items-center gap-2">
+            <Link
+              href="/main"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.12)] text-foreground transition-colors active:bg-[rgba(255,255,255,0.06)]"
+              aria-label="Главная"
+            >
+              <Home className="h-4 w-4" />
+            </Link>
             <button
               type="button"
               onClick={() => setShowUserMenu(!showUserMenu)}
@@ -79,12 +86,12 @@ export function AccountMobileHeader() {
             </button>
             <button
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)]"
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)]"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -99,39 +106,30 @@ export function AccountMobileHeader() {
       )}
 
       {/* Mobile nav */}
-      <div
-        className={`fixed inset-x-0 top-[57px] z-50 max-h-[calc(100vh-57px)] transform overflow-y-auto overscroll-contain border-t border-[rgba(255,255,255,0.06)] bg-[#232946]/98 backdrop-blur-xl transition-transform duration-300 ease-out lg:hidden ${
-          mobileOpen ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
-        <nav className="flex flex-col gap-1 px-4 py-4 safe-bottom" aria-label="Mobile navigation">
-          {navItems.map((item) => {
-            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`flex min-h-[48px] items-center rounded-lg px-4 text-base font-medium transition-colors ${
-                  isActive
-                    ? "bg-[rgba(94,234,212,0.08)] text-primary"
-                    : "text-muted-foreground active:bg-[rgba(255,255,255,0.04)] active:text-foreground"
-                }`}
-              >
-                {item.label}
-              </Link>
-            )
-          })}
-          <div className="mt-4 border-t border-[rgba(255,255,255,0.06)] pt-4">
-            <Link
-              href="/main"
-              className="flex min-h-[48px] items-center gap-3 rounded-lg px-4 text-base font-medium text-muted-foreground active:bg-[rgba(255,255,255,0.04)] active:text-foreground"
-            >
-              <Home className="h-5 w-5" />
-              Главная
-            </Link>
-          </div>
-        </nav>
-      </div>
+      {mobileOpen && (
+        <div
+          className="fixed inset-x-0 top-[57px] z-50 max-h-[calc(100vh-57px)] overflow-y-auto overscroll-contain border-t border-[rgba(255,255,255,0.06)] bg-[#232946]/98 backdrop-blur-xl lg:hidden"
+        >
+          <nav className="flex flex-col gap-1 px-4 py-4 safe-bottom" aria-label="Mobile navigation">
+            {navItems.map((item) => {
+              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`flex min-h-[48px] items-center rounded-lg px-4 text-base font-medium transition-colors ${
+                    isActive
+                      ? "bg-[rgba(94,234,212,0.08)] text-primary"
+                      : "text-muted-foreground active:bg-[rgba(255,255,255,0.04)] active:text-foreground"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
+      )}
 
       {/* User dropdown menu */}
       {showUserMenu && (

@@ -85,16 +85,32 @@ export function Header() {
           </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)] lg:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Mobile actions */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <Link
+            href="/main"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.12)] text-foreground transition-colors active:bg-[rgba(255,255,255,0.06)]"
+            aria-label="Главная"
+          >
+            <Home className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/account"
+            className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-colors active:brightness-90"
+            aria-label="Личный кабинет"
+          >
+            <User className="h-4 w-4" />
+          </Link>
+          <button
+            type="button"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-[rgba(255,255,255,0.06)]"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile nav overlay */}
@@ -106,11 +122,10 @@ export function Header() {
       )}
 
       {/* Mobile nav */}
-      <div
-        className={`fixed inset-x-0 top-[57px] z-50 max-h-[calc(100vh-57px)] transform overflow-y-auto overscroll-contain border-t border-[rgba(255,255,255,0.06)] bg-[#232946]/98 backdrop-blur-xl transition-transform duration-300 ease-out lg:hidden ${
-          mobileOpen ? "translate-y-0" : "-translate-y-full"
-        }`}
-      >
+      {mobileOpen && (
+        <div
+          className="fixed inset-x-0 top-[57px] z-50 max-h-[calc(100vh-57px)] overflow-y-auto overscroll-contain border-t border-[rgba(255,255,255,0.06)] bg-[#232946]/98 backdrop-blur-xl lg:hidden"
+        >
         <nav className="flex flex-col gap-1 px-4 py-4 safe-bottom" aria-label="Mobile navigation">
           {navItems.map((item) => {
             const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
@@ -128,24 +143,9 @@ export function Header() {
               </Link>
             )
           })}
-          <div className="mt-4 flex items-center gap-3 border-t border-[rgba(255,255,255,0.06)] pt-4">
-            <Link
-              href="/main"
-              className="flex h-12 w-12 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.12)] text-foreground"
-              aria-label="Главная"
-            >
-              <Home className="h-5 w-5" />
-            </Link>
-            <Link
-              href="/account"
-              className="glow-button flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-primary text-base font-medium text-primary-foreground"
-            >
-              <User className="h-5 w-5" />
-              Личный кабинет
-            </Link>
-          </div>
         </nav>
-      </div>
+        </div>
+      )}
     </header>
   )
 }
