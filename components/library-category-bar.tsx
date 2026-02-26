@@ -50,11 +50,11 @@ export function LibraryCategoryBar({
 
   return (
     <section className="w-full">
-      <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
+      <div className="relative">
         {canScrollLeft && (
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-1.5 text-foreground backdrop-blur-sm transition-colors hover:text-primary lg:left-4"
+            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-1.5 text-foreground backdrop-blur-sm transition-colors hover:text-primary"
             aria-label="Влево"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -63,7 +63,7 @@ export function LibraryCategoryBar({
         {canScrollRight && (
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-1.5 text-foreground backdrop-blur-sm transition-colors hover:text-primary lg:right-4"
+            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/80 p-1.5 text-foreground backdrop-blur-sm transition-colors hover:text-primary"
             aria-label="Вправо"
           >
             <ChevronRight className="h-4 w-4" />

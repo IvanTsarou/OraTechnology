@@ -11,7 +11,7 @@ const navItems = [
   { label: "Учителя", href: "/teachers" },
   { label: "Проекты", href: "/projects" },
   { label: "Учебный план", href: "/curriculum" },
-  { label: "Артефакты", href: "#" },
+  { label: "Артефакты", href: "/artifacts" },
   { label: "Блог", href: "/blog" },
 ]
 

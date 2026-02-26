@@ -127,58 +127,63 @@ export default function BlogPage() {
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row">
-          {/* Left sidebar - Authors (hidden on mobile) */}
-          <div className="hidden lg:block">
-            <BlogAuthorsSidebar
+        <div className="flex">
+          {/* Left sidebar - Authors (desktop) */}
+          <aside className="hidden w-64 shrink-0 lg:block">
+            <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto border-r border-[rgba(255,255,255,0.08)]">
+              <BlogAuthorsSidebar
               selectedAuthors={selectedAuthors}
               onAuthorsChange={setSelectedAuthors}
               onReset={() => setSelectedAuthors([])}
             />
+            </div>
+          </aside>
+
+          {/* Main content - centered max-w-7xl */}
+          <div className="min-w-0 flex-1">
+            <section className="pb-16 pt-2 lg:pt-6">
+              <div className="mx-auto max-w-7xl px-4 lg:px-8">
+                <div className="mb-6 hidden lg:block">
+                  <h1 className="font-serif text-2xl font-semibold tracking-wide text-foreground">
+                    Блог
+                  </h1>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Статьи, практики и новости от преподавателей Eira
+                  </p>
+                </div>
+
+                {filteredPosts.length > 0 ? (
+                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
+                    {filteredPosts.map((post) => (
+                      <BlogCard key={post.id} post={post} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-20 text-center">
+                    <div className="mb-4 text-6xl opacity-30">📝</div>
+                    <p className="text-lg font-medium text-foreground">
+                      Публикации не найдены
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Попробуйте изменить параметры поиска
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleReset}
+                      className="mt-4 rounded-lg bg-primary/20 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/30"
+                    >
+                      Сбросить фильтры
+                    </button>
+                  </div>
+                )}
+              </div>
+            </section>
           </div>
 
-          {/* Main content */}
-          <section className="min-w-0 flex-1 pb-16 pt-2 lg:pt-6">
-            <div className="mb-6 hidden px-4 lg:block lg:px-6">
-              <h1 className="font-serif text-2xl font-semibold tracking-wide text-foreground">
-                Блог
-              </h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Статьи, практики и новости от преподавателей Eira
-              </p>
-            </div>
-
-            <div className="px-4 lg:px-6">
-              {filteredPosts.length > 0 ? (
-                <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
-                  {filteredPosts.map((post) => (
-                    <BlogCard key={post.id} post={post} />
-                  ))}
-                </div>
-              ) : (
-                <div className="flex flex-col items-center justify-center py-20 text-center">
-                  <div className="mb-4 text-6xl opacity-30">📝</div>
-                  <p className="text-lg font-medium text-foreground">
-                    Публикации не найдены
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Попробуйте изменить параметры поиска
-                  </p>
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className="mt-4 rounded-lg bg-primary/20 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/30"
-                  >
-                    Сбросить фильтры
-                  </button>
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Right sidebar - Filters (hidden on mobile) */}
-          <div className="hidden lg:block">
-            <BlogFiltersSidebar
+          {/* Right sidebar - Filters (desktop) */}
+          <aside className="hidden w-64 shrink-0 lg:block">
+            <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto border-l border-[rgba(255,255,255,0.08)]">
+              <BlogFiltersSidebar
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               selectedCategories={selectedCategories}
@@ -188,7 +193,8 @@ export default function BlogPage() {
               onReset={handleReset}
               resultsCount={filteredPosts.length}
             />
-          </div>
+            </div>
+          </aside>
         </div>
       </main>
 

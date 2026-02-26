@@ -60,20 +60,13 @@ export default function TeachersPage() {
               categories={teacherCategories}
               activeCategory={activeCategory}
               onCategoryChange={handleCategoryChange}
+              resultsCount={filteredTeachers.length}
             />
           </div>
         </section>
 
         <section className="pb-16 pt-4">
-          <div className="mb-6 flex flex-wrap items-baseline justify-between gap-4 px-4 lg:px-8">
-            <h2 className="sr-only">Каталог учителей</h2>
-            <span className="text-sm text-muted-foreground">
-              Найдено учителей:{" "}
-              <span className="font-medium text-foreground">
-                {filteredTeachers.length}
-              </span>
-            </span>
-          </div>
+          <h2 className="sr-only">Каталог учителей</h2>
 
           {filteredTeachers.length > 0 ? (
             <TeachersGrid

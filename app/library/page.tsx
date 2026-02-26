@@ -7,7 +7,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { LibraryCategoryBar } from "@/components/library-category-bar"
 import { LibrarySidebar } from "@/components/library-sidebar"
-import { LibraryGrid } from "@/components/library-grid"
+import { LibraryCard } from "@/components/library-card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
@@ -96,72 +96,84 @@ export default function LibraryPage() {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <main className="flex-1">
-        {/* Mobile header with filters button */}
-        <div className="flex items-center justify-between gap-4 px-4 pb-4 pt-6 lg:hidden">
-          <div>
-            <h1 className="font-serif text-xl font-semibold tracking-wide text-foreground">
-              Библиотека
-            </h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {filteredItems.length} материалов
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setMobileFiltersOpen(true)}
-            className="flex items-center gap-2 rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.04)] px-3 py-2 text-sm font-medium text-foreground"
-          >
-            <Filter className="h-4 w-4" />
-            Фильтры
-            {activeFiltersCount > 0 && (
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                {activeFiltersCount}
-              </span>
-            )}
-          </button>
-        </div>
-
-        {/* Category filters */}
-        <section className="pb-4 pt-2 lg:pt-8">
-          <LibraryCategoryBar
-            categories={libraryCategories}
-            activeCategory={activeCategory}
-            onCategoryChange={handleCategoryChange}
-          />
-        </section>
-
-        <div className="flex flex-col lg:flex-row">
-          {/* Desktop Sidebar */}
-          <div className="hidden lg:block">
-            <LibrarySidebar
-              selectedTypes={selectedTypes}
-              onTypesChange={handleTypesChange}
-              selectedAuthorIds={selectedAuthorIds}
-              onAuthorIdsChange={handleAuthorIdsChange}
-              authors={libraryAuthors}
-              onReset={handleReset}
+      <main className="flex flex-1">
+        {/* Left Sidebar - Filters (desktop) */}
+        <aside className="hidden w-64 shrink-0 lg:block">
+          <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto border-r border-[rgba(255,255,255,0.08)]">
+          <LibrarySidebar
+            selectedTypes={selectedTypes}
+            onTypesChange={handleTypesChange}
+            selectedAuthorIds={selectedAuthorIds}
+            onAuthorIdsChange={handleAuthorIdsChange}
+            authors={libraryAuthors}
+            onReset={handleReset}
             />
           </div>
+        </aside>
 
-          {/* Main content */}
-          <section className="min-w-0 flex-1 pb-16 pt-4">
-            <div className="mb-6 hidden items-baseline justify-between gap-4 px-4 lg:flex lg:px-8">
-              <h1 className="font-serif text-2xl font-semibold tracking-wide text-foreground">
+        {/* Main content */}
+        <div className="min-w-0 flex-1">
+          {/* Mobile header with filters button */}
+          <div className="flex items-center justify-between gap-4 px-4 pb-4 pt-6 lg:hidden">
+            <div>
+              <h1 className="font-serif text-xl font-semibold tracking-wide text-foreground">
                 Библиотека
               </h1>
-              <span className="text-sm text-muted-foreground">
-                Найдено:{" "}
-                <span className="font-medium text-foreground">
-                  {filteredItems.length}
-                </span>
-              </span>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {filteredItems.length} материалов
+              </p>
             </div>
+            <button
+              type="button"
+              onClick={() => setMobileFiltersOpen(true)}
+              className="flex items-center gap-2 rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.04)] px-3 py-2 text-sm font-medium text-foreground"
+            >
+              <Filter className="h-4 w-4" />
+              Фильтры
+              {activeFiltersCount > 0 && (
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </button>
+          </div>
 
-            {filteredItems.length > 0 ? (
-              <LibraryGrid items={filteredItems} filterKey={String(filterKey)} />
-            ) : (
-              <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          {/* Category filters */}
+          <section className="pb-4 pt-2 lg:pt-8">
+            <div className="mx-auto max-w-7xl px-4 lg:px-8">
+              <LibraryCategoryBar
+                categories={libraryCategories}
+                activeCategory={activeCategory}
+                onCategoryChange={handleCategoryChange}
+              />
+            </div>
+          </section>
+
+          {/* Content */}
+          <section className="pb-16 pt-2 lg:pt-4">
+            <div className="mx-auto max-w-7xl px-4 lg:px-8">
+              <div className="mb-6 hidden items-baseline justify-between gap-4 lg:flex">
+                <h1 className="font-serif text-2xl font-semibold tracking-wide text-foreground">
+                  Библиотека
+                </h1>
+                <span className="text-sm text-muted-foreground">
+                  Найдено:{" "}
+                  <span className="font-medium text-foreground">
+                    {filteredItems.length}
+                  </span>
+                </span>
+              </div>
+
+              {filteredItems.length > 0 ? (
+                <div
+                  key={filterKey}
+                  className="library-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                >
+                  {filteredItems.map((item, index) => (
+                    <LibraryCard key={item.id} item={item} index={index} />
+                  ))}
+                </div>
+              ) : (
                 <div className="flex flex-col items-center justify-center py-20 text-center">
                   <p className="text-muted-foreground">
                     По выбранным фильтрам материалов не найдено.
@@ -174,10 +186,15 @@ export default function LibraryPage() {
                     Сбросить фильтры
                   </button>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </section>
         </div>
+
+        {/* Right Sidebar - placeholder for future use (desktop) */}
+        <aside className="hidden w-64 shrink-0 xl:block">
+          <div className="sticky top-[57px] h-[calc(100vh-57px)] border-l border-[rgba(255,255,255,0.08)]" />
+        </aside>
       </main>
 
       <Footer />

@@ -11,6 +11,7 @@ interface TeacherSearchFiltersProps {
   categories: { id: string; label: string }[]
   activeCategory: string
   onCategoryChange: (id: string) => void
+  resultsCount?: number
 }
 
 export function TeacherSearchFilters({
@@ -19,6 +20,7 @@ export function TeacherSearchFilters({
   categories,
   activeCategory,
   onCategoryChange,
+  resultsCount,
 }: TeacherSearchFiltersProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
@@ -51,15 +53,23 @@ export function TeacherSearchFilters({
 
   return (
     <div className="space-y-4">
-      <div className="relative mx-auto max-w-2xl">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          type="search"
-          placeholder="Поиск по имени или специализации..."
-          value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
-          className="h-11 pl-10"
-        />
+      <div className="mx-auto flex max-w-2xl items-center gap-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Поиск по имени или специализации..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            className="h-11 pl-10"
+          />
+        </div>
+        {resultsCount !== undefined && (
+          <span className="shrink-0 text-sm text-muted-foreground">
+            Найдено:{" "}
+            <span className="font-medium text-foreground">{resultsCount}</span>
+          </span>
+        )}
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">

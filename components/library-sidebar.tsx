@@ -5,7 +5,6 @@ import Image from "next/image"
 import { Search, X } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 import type { MaterialType } from "@/lib/library-data"
 import { getTypeLabel } from "@/lib/library-data"
@@ -57,9 +56,7 @@ export function LibrarySidebar({
   }
 
   return (
-    <aside className="flex w-full flex-col overflow-hidden border-r border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] lg:w-64 lg:shrink-0">
-      <ScrollArea className="h-full max-h-[calc(100vh-12rem)] lg:max-h-[calc(100vh-10rem)]">
-        <div className="flex flex-col gap-5 p-4">
+    <div className="flex flex-col gap-5 bg-[rgba(255,255,255,0.02)] p-4">
           {/* Reset button */}
           {hasFilters && (
             <button
@@ -147,8 +144,6 @@ export function LibrarySidebar({
               )}
             </div>
           </div>
-        </div>
-      </ScrollArea>
-    </aside>
+    </div>
   )
 }

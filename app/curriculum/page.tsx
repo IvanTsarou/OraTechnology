@@ -95,10 +95,11 @@ export default function CurriculumPage() {
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex">
           {/* Desktop Sidebar */}
-          <div className="hidden lg:block">
-            <CurriculumSidebar
+          <aside className="hidden w-64 shrink-0 lg:block">
+            <div className="sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto border-r border-[rgba(255,255,255,0.08)]">
+              <CurriculumSidebar
               selectedCategories={selectedCategories}
               onCategoriesChange={setSelectedCategories}
               selectedTeachers={selectedTeachers}
@@ -107,7 +108,8 @@ export default function CurriculumPage() {
               onLevelsChange={setSelectedLevels}
               onReset={handleReset}
             />
-          </div>
+            </div>
+          </aside>
 
           {/* Main content */}
           <section className="min-w-0 flex-1 pb-16 pt-2 lg:pt-6">
