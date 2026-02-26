@@ -123,11 +123,11 @@ export function AccountMobileHeader() {
           })}
           <div className="mt-4 border-t border-[rgba(255,255,255,0.06)] pt-4">
             <Link
-              href="/"
+              href="/main"
               className="flex min-h-[48px] items-center gap-3 rounded-lg px-4 text-base font-medium text-muted-foreground active:bg-[rgba(255,255,255,0.04)] active:text-foreground"
             >
               <Home className="h-5 w-5" />
-              На главную
+              Главная
             </Link>
           </div>
         </nav>

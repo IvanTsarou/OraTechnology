@@ -65,10 +65,10 @@ export function AccountHeader() {
         {/* Right actions */}
         <div className="flex items-center gap-3">
           <Link
-            href="/"
+            href="/main"
             className="flex h-10 w-10 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.12)] text-foreground transition-colors hover:border-[rgba(255,255,255,0.25)] hover:text-primary"
-            aria-label="На главную"
-            title="На главную"
+            aria-label="Главная"
+            title="Главная"
           >
             <Home className="h-4 w-4" />
           </Link>
