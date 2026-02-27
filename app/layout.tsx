@@ -51,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={`${outfit.variable} ${cinzel.variable} font-sans antialiased`}>
+        <div className="site-energy-overlay" aria-hidden="true" />
         {children}
         <Analytics />
       </body>
