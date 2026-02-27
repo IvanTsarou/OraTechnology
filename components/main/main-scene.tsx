@@ -10,13 +10,11 @@ const SCROLL_HEIGHT = `${SCROLL_SCREENS * 100}vh`
 
 export default function MainScene() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [audioLoaded, setAudioLoaded] = useState(false)
-  const [videoLoaded, setVideoLoaded] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100)
@@ -120,24 +118,6 @@ export default function MainScene() {
                 hsl(235, 25%, ${8 - depthProgress * 3}%) 100%
               )`,
             }}
-          />
-
-          {/* Видео-фон (если загружено) */}
-          <video
-            ref={videoRef}
-            className="absolute inset-0 h-full w-full object-cover will-change-transform"
-            style={{
-              transform: `scale(${scale * 1.1})`,
-              transformOrigin: `${positionX}% ${positionY}%`,
-              opacity: videoLoaded ? 0.4 + depthProgress * 0.3 : 0,
-              filter: `brightness(${0.7 + depthProgress * 0.3}) saturate(${1.1 + depthProgress * 0.2})`,
-            }}
-            src="/video-square-mp4_14999540.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            onCanPlay={() => setVideoLoaded(true)}
           />
 
           {/* Основное изображение высокого качества */}
